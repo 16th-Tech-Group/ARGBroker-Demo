@@ -7,7 +7,8 @@ Esta aplicacion considerara:
 - Que las acciones representan una participación en la propiedad de una empresa;
 - Que el broker es quien ejecuta las ordenes de compra y venta en MERVAL. Tendra una comision fija del 1,5% de la operación.
 - Que las acciones a comercializar, en la aplicación, son las que cotizan en MERVAL;
-- Que la Demo es una situacion simulada (se ingresara un monto ficticio a la cuenta de nuevos inversores, no exitiendo la posibilidad de retiro real);
+- Que la Demo es una situacion simulada (se ingresara un monto ficticio a la cuenta de nuevos inversores, no exitiendo la posibilidad de retiro real).
+
 Se ha conformado un equipo de 8 integrantes de la comision 1 de la Tecnicatura en Desarrollo de Software cuyo nombre es 16th Tech Group. Los integrantes del equipo son los siguientes:
 - AVILA, FRANCO IVAN
 - BUSTOS, BAUTISTA
