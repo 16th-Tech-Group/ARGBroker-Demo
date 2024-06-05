@@ -11,7 +11,6 @@ Esta aplicacion considerara:
 
 Se ha conformado un equipo de 8 integrantes de la comision 1 de la Tecnicatura en Desarrollo de Software cuyo nombre es 16th Tech Group. Los integrantes del equipo son los siguientes:
 - AVILA, FRANCO IVAN
-- BUSTOS, BAUTISTA
 - CAÑAS, LUCIANO
 - CORASPE BUENO, HEYME GERALDINE
 - DORGNACH, JOAQUIN
