@@ -15,6 +15,12 @@ class Inversor():
 class Inversor:
     def __init__(self):
         self.inversores = {}
+#Creacion del Loguin de Usuario
+    def verificar_usuario(self,correo_electronico,contraseña):
+        if correo_electronico == "1234" and contraseña == 1234:
+            return "exit"
+        else:
+            raise ValueError ("El Correo o la Contraseña son incorrectos ")
 
     def alta(self, nombre, datos):
         """Añadir un nuevo inversor."""
@@ -78,7 +84,7 @@ class Inversor:
             for nombre, info in self.inversores.items():
                 print(f"Inversor: {nombre}, Datos: {info['datos']}, Billetera: ${info['billetera']}")
 
-
+Usuario = Inversor(0,0)
 
 #Crear Metodos
     #def alta()
