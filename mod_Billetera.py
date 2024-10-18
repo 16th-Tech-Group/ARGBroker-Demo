@@ -12,4 +12,4 @@ class Billetera:
         self.__total_invertido = total_invertido
         self.__ganacia = ganacia
         self.__perdidas = perdidas
-       # self.__id_operacion = id_operacion
+        self.__id_operacion = id_operacion
