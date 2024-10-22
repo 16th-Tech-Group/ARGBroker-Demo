@@ -41,13 +41,28 @@ class Accion():
     def editar_min_diario(self,nvo_min_diario):
         self.min_diario=nvo_min_diario
         return(f"Monto mínimo diario actualizado a: {self.min_diario}")
+    
+
+#def edit_ultimo_cierre
+    def mostrar_ultimo_cierre(self):
+        return(f"El monto del último cierre es: {self.ultimo_cierre}")
+    
+    def editar_ultimo_cierre(self,nvo_ultimo_cierre):
+        self.ultimo_cierre=nvo_ultimo_cierre
+        return(f"Monto del último cierre actualizado a: {self.ultimo_cierre}")
+
+accion = Accion(1, "Empresa X", 100, 200, 150, 120, 130, 90, 160, 140)
+
+print(accion.mostrar_ultimo_cierre())
+print(accion.editar_ultimo_cierre(666))
+print(accion.mostrar_ultimo_cierre())
 
 #instancia max    
-accion = Accion(1, "Empresa X", 100, 200, 150, 120, 130, 90, 160, 140)
+'''accion = Accion(1, "Empresa X", 100, 200, 150, 120, 130, 90, 160, 140)
 
 print(accion.mostrar_min_diario())
 print(accion.editar_min_diario(85))
-print(accion.mostrar_min_diario())
+print(accion.mostrar_min_diario())'''
 
 ''' #instancia min
 accion = Accion(1, "Empresa X", 100, 200, 150, 120, 130, 90, 160, 140)
