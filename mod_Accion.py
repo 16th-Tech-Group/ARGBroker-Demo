@@ -25,3 +25,16 @@ class Accion():
     #def edit_ultimo_cierre
 
     #heyme Coraspe
+    def mostrar_max_diario(self):
+        return(f"El monto máximo diario es: {self.max_diario}")
+    
+#def edit_max_diario
+    def editar_max_diario(self,nvo_max_diario):
+        self.max_diario=nvo_max_diario
+        return(f"Monto mínimo diario actualizado a: {self.min_diario}")
+
+accion = Accion(1, "Empresa X", 100, 200, 150, 120, 130, 90, 160, 140)
+
+print(accion.mostrar_max_diario())
+print(accion.editar_max_diario(133))
+print(accion.mostrar_max_diario())
