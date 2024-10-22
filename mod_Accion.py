@@ -23,3 +23,5 @@ class Accion():
     #def edit_min_diario
     #def edit_max_diario
     #def edit_ultimo_cierre
+
+    #heyme Coraspe
