@@ -1,5 +1,4 @@
 #Crear clase Accion
-
 class Accion():
     def __init__(self,id_accion,nombre_empresa,compra_diaria,venta_diaria,precio_venta,precio_compra,apertura,min_diario,
                  max_diario,ultimo_cierre):
