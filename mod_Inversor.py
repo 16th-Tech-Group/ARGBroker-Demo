@@ -84,8 +84,6 @@ class Inversor:
             for nombre, info in self.inversores.items():
                 print(f"Inversor: {nombre}, Datos: {info['datos']}, Billetera: ${info['billetera']}")
 
-Usuario = Inversor(0,0)
-
 #Crear Metodos
     #def alta()
     #def baja()
