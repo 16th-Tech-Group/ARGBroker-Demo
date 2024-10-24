@@ -1,3 +1,4 @@
+from Conexion_MySQL import conectar_mysql
 #Crear Clase Inversor
 class Inversor():
     def __init__(self,id_persona_cuit,id_billetera,nombre,id_localidad,ex_politica,id_inversor,calle,numero_calle,
@@ -15,12 +16,25 @@ class Inversor():
 class Inversor:
     def __init__(self):
         self.inversores = {}
-#Creacion del Loguin de Usuario
+#Creacion del Login de Usuario
     def verificar_usuario(self,correo_electronico,contraseña):
-        if correo_electronico == "1234" and contraseña == 1234:
-            return "exit"
-        else:
-            raise ValueError ("El Correo o la Contraseña son incorrectos ")
+        while True:
+            print("Ingrese su Correo y Contraseña:")
+            correo_electronico = input("Ingrese su Correo:")
+            contraseña = input("Ingrese su contraseña:")
+            
+            with conectar_mysql.cursor() as cursor:
+                consulta =("select Inversores,pass from correo_electronico where correo_electronico=? and pass=?")
+                cursor.execute(consulta,(correo_electronico,contraseña))
+                
+                resultado = cursor.fetchall()
+                
+            if resultado:
+                for i in resultado:
+                    return "Bienvenido"+i[0]
+                break
+            else:
+                raise ValueError ("El Correo o la Contraseña es incorrecta")
 
     def alta(self, nombre, datos):
         """Añadir un nuevo inversor."""
