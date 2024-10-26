@@ -8,12 +8,15 @@ tipo_inversor VARCHAR(50)
 );
 CREATE TABLE Provincias(
 id_provincia INT PRIMARY KEY,
+
 nombre_provincia VARCHAR(50)
 );
 CREATE TABLE Localidades(
 id_localidad INT PRIMARY KEY,
 nombre_localidad VARCHAR(50)
 );
+
+
 CREATE TABLE Inversores(
 id_inversor INT PRIMARY KEY,
 id_perfil INT,
@@ -26,6 +29,7 @@ numero_calle INT,
 correo_electronico VARCHAR(70),
 contraseña VARCHAR(50)
 );
+
 CREATE TABLE Billeteras(
 id_billetera INT PRIMARY KEY,
 id_inversor INT,
@@ -36,6 +40,7 @@ saldo_ars FLOAT,
 balance_total FLOAT,
 pnl FLOAT
 );
+
 CREATE TABLE Operaciones(
 id_operacion INT PRIMARY KEY,
 tipo_operacion VARCHAR(30),
@@ -46,6 +51,7 @@ id_billetera INT,
 id_accion INT,
 monto_comision FLOAT
 );
+
 CREATE TABLE Acciones(
 id_accion INT PRIMARY KEY,
 nombre_empresa VARCHAR(70),
@@ -61,6 +67,9 @@ ultimo_cierre FLOAT
 );
 
 select * From Provincias 
+
+
+
 
 
 
