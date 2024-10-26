@@ -60,6 +60,7 @@ max_diario FLOAT,
 ultimo_cierre FLOAT
 );
 
+select * From Provincias 
 
 
 

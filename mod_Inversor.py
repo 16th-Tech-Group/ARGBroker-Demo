@@ -1,4 +1,4 @@
-from Conexion_MySQL import conectar_mysql
+from Conexion_MySQL import conexion
 #Crear Clase Inversor
 class Inversor():
     def __init__(self,id_persona_cuit,id_billetera,nombre,id_localidad,ex_politica,id_inversor,calle,numero_calle,
@@ -15,31 +15,12 @@ class Inversor():
         self.contraseña=contraseña
 
 #Creacion del Login de Usuario
-    def verificar_usuario(self,correo_electronico,contraseña):
-        while True:
-            print("Ingrese su Correo y Contraseña:")
-            correo_electronico = input("Ingrese su Correo:")
-            contraseña = input("Ingrese su contraseña:")
-            
-            with conectar_mysql.cursor() as cursor:
-                consulta =("select Inversores,pass from correo_electronico where correo_electronico=? and pass=?")
-                cursor.execute(consulta,(correo_electronico,contraseña))
-                
-                resultado = cursor.fetchall()
-                
-            if resultado:
-                for i in resultado:
-                    return "Bienvenido"+i[0]
-                break
-            else:
-                raise ValueError ("El Correo o la Contraseña es incorrecta")
-
-#Crear Metodos
-    #def alta()
-    #def baja()
-    #def editar()
-    #def comprar() falta este
-    #def vender() falta este
-    #def depositar()
-    #def retirar()
-    #def consulta_billetera()
+    def loguin_usuario(self,correo_electronico,contraseña):
+        cursor = conexion.cursor()
+        cursor.execute("select * from provincia;")
+        provincia = cursor.fetchall()
+        
+        return provincia
+        
+    
+    
