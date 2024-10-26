@@ -13,3 +13,5 @@ class Billetera:
         self.__ganacia = ganacia
         self.__perdidas = perdidas
         self.__id_operacion = id_operacion
+
+##heyme coraspe
