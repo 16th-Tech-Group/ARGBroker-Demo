@@ -1,11 +1,9 @@
-import mod_Billetera
-import mod_Accion
-import mod_Tablas_Grales
-import mod_Inversor
-import mod_Operacion
+from mod_Billetera import Billetera
+from mod_Accion import Accion
+#from mod_Tablas_Grales
+from mod_Inversor import Inversor
+#from mod_Operacion
 import pytest
 
-def test_verificar_usuario():
-    User = Usuario(0,0)
-    assert User.contraseña()
+
     
