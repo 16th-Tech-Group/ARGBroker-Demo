@@ -54,6 +54,7 @@ class Accion():
         self.__ultimo_cierre = ultimo_cierre
     
 
+
 #Declarar Metodos
     #def alta_accion(self):
     #def baja_accion(self):
@@ -65,4 +66,27 @@ class Accion():
         self.set_venta_diaria=nvo_venta_diaria
         return "Venta diaria actualizada a:",self.get_venta_diaria
     
+#declarar metodo editar_max_diario   
+    def mostrar_max_diario(self):
+        return(f"El monto máximo diario es: {self.__max_diario}")
     
+    def editar_max_diario(self,nvo_max_diario):
+        self.__max_diario=nvo_max_diario
+        return(f"Monto mínimo diario actualizado a: {self.__max_diario}")
+
+#declarar metodo editar_min_diario
+    def mostrar_min_diario(self):
+        return (f"El mínimo diario es: {self.__min_diario}")
+    
+    def editar_min_diario(self,nvo_min_diario):
+        self.__min_diario=nvo_min_diario
+        return(f"Monto mínimo diario actualizado a: {self.__min_diario}")
+
+#declarar metodo edit_min_diario
+    def mostrar_ultimo_cierre(self):
+        return(f"El monto del último cierre es: {self.__ultimo_cierre}")
+    
+    def editar_ultimo_cierre(self,nvo_ultimo_cierre):
+        self.__ultimo_cierre=nvo_ultimo_cierre
+        return(f"Monto del último cierre actualizado a: {self.__ultimo_cierre}")
+
