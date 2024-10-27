@@ -53,9 +53,7 @@ def conectar_mysql(Orden, Valores = None):
 
 
 
-
+#conectar_mysql(Orden = "insert into Provincias (id_provincia,nombre_provincia) Values(%s,%s)",Valores = [3,"Cordoba"])
 
 if __name__ == '__main__':
-    
-    conectar_mysql(Orden = "insert into Provincias (id_provincia,nombre_provincia) Values(%s,%s)",
-                   Valores = [3,"Cordoba"])
+    correo_electronico = "raul45@gmail.com"
