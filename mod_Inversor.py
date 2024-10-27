@@ -94,58 +94,78 @@ class Inversor():
         except:
             raise ValueError ("Ocurrio un error")
          
-#Alta Inversor
-    def alta_inversor(self):
+# Alta Inversor
+    def alta_inversor(self, id_persona_cuit, id_billetera, nombre, 
+                    id_localidad, ex_politica, id_inversor, calle, 
+                    numero_calle, correo_electronico, contraseña):
         try:
             # Verificar si el inversor ya existe en la base de datos
-            resultado = conectar_mysql(Orden="SELECT * FROM inversores WHERE id_persona_cuit=%s", valores=(self.get_id_persona_cuit(),))
+            resultado = conectar_mysql(Orden=f"SELECT id_persona_cuit FROM inversores WHERE id_persona_cuit='{id_persona_cuit}'")
             
-            if resultado:  # Si el inversor ya existe
-                return "Cuil ya registrado"
-            
-            # Si no existe, proceder a la inserción
-            Orden = """INSERT INTO inversores (id_persona_cuit, id_billetera, nombre, 
-            id_localidad, ex_politica, id_inversor, calle, numero_calle, correo_electronico, contraseña)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-            
-            Valores = (
-                self.get_id_persona_cuit(), self.get_id_billetera(), self.get_nombre(), 
-                self.get_id_localidad(), self.get_ex_politica(), self.get_id_inversor(), 
-                self.get_calle(), self.get_numero_calle(), self.get_correo_electronico(), 
-                self.get_contraseña()
-            )
-            
-            conectar_mysql(Orden=Orden, valores=Valores)
-            return "Inversor dado de alta exitosamente."
+            if resultado and resultado[0][0] == id_persona_cuit:  # Si el inversor ya existe
+                return "Cuit ya registrado"
+            else:
+                Orden = """INSERT INTO inversores (id_persona_cuit, id_billetera, nombre, 
+                    id_localidad, ex_politica, id_inversor, calle, numero_calle, correo_electronico, contraseña)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+                
+                Valores = [id_persona_cuit, id_billetera, nombre, 
+                        id_localidad, ex_politica, id_inversor, 
+                        calle, numero_calle, correo_electronico, contraseña]
+                
+                conectar_mysql(Orden=Orden, valores=Valores)
+                return "Inversor dado de alta exitosamente."
         
         except Exception as e:
             return f"Ocurrió un error al intentar dar de alta el inversor: {str(e)}"
 
+
  # Baja Inversor
-    def baja_inversor(self):
-        if not self.inversor_existe():
+    def baja_inversor(self, id_persona_cuit):
+        if not self.inversor_existe(id_persona_cuit):
             return "El inversor no existe en la base de datos."
         try:
             query = "DELETE FROM inversores WHERE id_persona_cuit = %s"
-            valores = (self.get_id_persona_cuit(),)
+            valores = (id_persona_cuit,)
             conectar_mysql(Orden=query, valores=valores)
             return "Inversor eliminado exitosamente."
         except Exception as e:
-         return f"Ocurrió un error al intentar eliminar el inversor: {str(e)}"
+            return f"Ocurrió un error al intentar eliminar el inversor: {str(e)}"
 
-# Editar Inversor
-    def editar_inversor(self, **kwargs):
-        if not self.inversor_existe():
+
+    # Editar Inversor
+    def editar_inversor(self, id_persona_cuit, id_billetera=None, nombre=None, id_localidad=None, 
+                        ex_politica=None, id_inversor=None, calle=None, numero_calle=None, 
+                        correo_electronico=None, contraseña=None):
+        
+        if not self.inversor_existe(id_persona_cuit):
             return "El inversor no existe en la base de datos."
-    
+
+        # Filtra los parámetros que no son None y genera la lista de campos a actualizar
+        campos_a_actualizar = { 
+            "id_billetera": id_billetera, 
+            "nombre": nombre, 
+            "id_localidad": id_localidad, 
+            "ex_politica": ex_politica, 
+            "id_inversor": id_inversor, 
+            "calle": calle, 
+            "numero_calle": numero_calle, 
+            "correo_electronico": correo_electronico, 
+            "contraseña": contraseña
+        }
+        campos_a_actualizar = {key: value for key, value in campos_a_actualizar.items() if value is not None}
+        
+        if not campos_a_actualizar:
+            return "No se proporcionaron campos para actualizar."
+
         try:
             query = "UPDATE inversores SET "
-            query += ", ".join([f"{key} = %s" for key in kwargs.keys()])
+            query += ", ".join([f"{key} = %s" for key in campos_a_actualizar.keys()])
             query += " WHERE id_persona_cuit = %s"
-        
-            valores = list(kwargs.values()) + [self.get_id_persona_cuit()]
+            
+            valores = list(campos_a_actualizar.values()) + [id_persona_cuit]
             conectar_mysql(Orden=query, valores=valores)
             return "Inversor actualizado exitosamente."
-    
+        
         except Exception as e:
             return f"Ocurrió un error al intentar actualizar el inversor: {str(e)}"
