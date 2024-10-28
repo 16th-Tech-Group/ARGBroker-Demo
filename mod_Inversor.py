@@ -80,7 +80,7 @@ class Inversor:
         """Mostrar todos los inversores."""
         if not self.inversores:
             print("No hay inversores disponibles.")
-        else:
+        else:C
             for nombre, info in self.inversores.items():
                 print(f"Inversor: {nombre}, Datos: {info['datos']}, Billetera: ${info['billetera']}")
 
