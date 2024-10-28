@@ -15,5 +15,4 @@ Se ha conformado un equipo de 7 integrantes de la comision 1 de la Tecnicatura e
 - CORASPE BUENO, HEYME GERALDINE
 - DORGNACH, JOAQUIN
 - GIRAUDO, GUILLERMO
-- GUGLIELMETTI, PAULA VALENTINA
 - JUAREZ, VALENTIN
