@@ -108,14 +108,14 @@ class Inversor():
             id_localidad, ex_politica, id_inversor, calle, numero_calle, correo_electronico, contraseña)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
             
-            Valores = (
+            valores = (
                 self.get_id_persona_cuit(), self.get_id_billetera(), self.get_nombre(), 
                 self.get_id_localidad(), self.get_ex_politica(), self.get_id_inversor(), 
                 self.get_calle(), self.get_numero_calle(), self.get_correo_electronico(), 
                 self.get_contraseña()
             )
             
-            conectar_mysql(Orden=Orden, valores=Valores)
+            conectar_mysql(Orden=Orden, valores=valores)
             return "Inversor dado de alta exitosamente."
         
         except Exception as e:
