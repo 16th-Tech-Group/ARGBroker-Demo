@@ -51,3 +51,25 @@ class Accion():
             return self.__apertura
         else:
             return "El precio no pudo Actualizarce"
+        def mostrar_max_diario(self):
+        return(f"El monto máximo diario es: {self.__max_diario}")
+    
+    def editar_max_diario(self,nvo_max_diario):
+        self.__max_diario=nvo_max_diario
+        return(f"Monto mínimo diario actualizado a: {self.__max_diario}")
+
+#declarar metodo editar_min_diario
+    def mostrar_min_diario(self):
+        return (f"El mínimo diario es: {self.__min_diario}")
+    
+    def editar_min_diario(self,nvo_min_diario):
+        self.__min_diario=nvo_min_diario
+        return(f"Monto mínimo diario actualizado a: {self.__min_diario}")
+
+#declarar metodo edit_min_diario
+    def mostrar_ultimo_cierre(self):
+        return(f"El monto del último cierre es: {self.__ultimo_cierre}")
+    
+    def editar_ultimo_cierre(self,nvo_ultimo_cierre):
+        self.__ultimo_cierre=nvo_ultimo_cierre
+        return(f"Monto del último cierre actualizado a: {self.__ultimo_cierre}")
