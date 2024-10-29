@@ -1,5 +1,6 @@
 # Crear Clase Operacion
 import datetime
+from Conexion_MySQL import conectar_mysql
 
 class Operacion():
     def __init__(self,id_operacion,tipo_operacion,precio_operacion,fecha,id_inversor,id_accion):
@@ -68,7 +69,3 @@ class Operacion():
                 operacion="INSERT INTO operaciones (id_operacion,tipo_operacion,precio_operacion,fecha,id_inversor,id_accion) VALUES (%s,%s,%s,%s,%s,%s))"
                 conectar_mysql(operacion=operacion, valores=valores)
                 return "Operacion realizada con exito"
-
-
-
-

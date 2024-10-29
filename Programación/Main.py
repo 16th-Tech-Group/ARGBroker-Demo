@@ -3,8 +3,6 @@ from mod_Billetera import Billetera
 from mod_Inversor import Inversor
 from mod_Tablas_Grales import PerfilInversor, Provincia,Localidad
 from mod_Operacion import Operacion
-import _mysql_connector
-from Conexion_MySQL import conectar_mysql
 import datetime
 
 #Menu opciones

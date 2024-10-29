@@ -1,4 +1,4 @@
-from Conexion_MySQL import conectar_mysql, conexion
+from Conexion_MySQL import conectar_mysql
 # Crear Clases Generales
 class PerfilInversor():
     def __init__(self,id_tipo_inversor,tipo_inversor):
