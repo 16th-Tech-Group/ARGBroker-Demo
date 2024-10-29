@@ -1,14 +1,14 @@
 from Conexion_MySQL import conectar_mysql
 #Crear Clase Inversor
 class Inversor():
-    def __init__(self,id_persona_cuit,id_billetera,nombre,id_localidad,ex_politica,id_inversor,calle,numero_calle,
+    def __init__(self,id_persona_cuit,id_billetera,nombre,id_perfil,id_localidad,ex_politica,calle,numero_calle,
                  correo_electronico,contraseña):
         self.__id_persona_cuit=id_persona_cuit
         self.__id_billetera=id_billetera
         self.__nombre=nombre
+        self.__id_perfil = id_perfil
         self.__id_localidad=id_localidad
         self.__ex_politica=ex_politica
-        self.__id_inversor=id_inversor
         self.__calle=calle
         self.__numero_calle=numero_calle
         self.__correo_electronico=correo_electronico
@@ -28,6 +28,11 @@ class Inversor():
         return self.__nombre
     def Set_nombre(self,nombre):
         self.__nombre = nombre
+        
+    def get_id_perfil(self):
+        return self.__id_perfil
+    def Set_id_perfil(self,id_perfil):
+        self.__id_perfil = id_perfil
     
     def get_id_localidad(self):
         return self.__id_localidad
@@ -38,11 +43,6 @@ class Inversor():
         return self.__ex_politica
     def Set_ex_politica(self,ex_politica):
         self.__ex_politica = ex_politica
-    
-    def get_id_inversor(self):
-        return self.__id_inversor
-    def Set_id_inversor(self,id_inversor):
-        self.__id_inversor = id_inversor
     
     def get_calle(self):
         return self.__calle
@@ -63,19 +63,7 @@ class Inversor():
         return self.__contraseña
     def Set_contraseña(self,contraseña):
         self.__contraseña = contraseña
-
-    def inversor_existe(self):
-        """Verifica si un inversor existe en la base de datos basado en el id_persona_cuit"""
-        try:
-            query = "SELECT COUNT(*) FROM inversores WHERE id_persona_cuit = %s"
-            valores = (self.get_id_persona_cuit(),)
-            resultado = conectar_mysql(Orden=query, valores=valores)
-
-        # Verifica si el resultado muestra al menos un registro
-            return resultado[0][0] > 0 if resultado else False
-        except Exception as e:
-            return f"Error al verificar la existencia del inversor: {str(e)}"
-         
+          
 #Creacion del Login de Usuario
     def loguin_usuario(self,correo_electronico,contraseña):
         try:
@@ -87,7 +75,7 @@ class Inversor():
                 if usuarioL[0][0] == correo_electronico and contraseñaL[0][0] == str(contraseña):
                     return "Bienvenido"
                 else:
-                    return "El usuarion no existe"
+                    return "El usuario Ingresado no existe"
             
             else:
                 return ("El correo o la Contraseña estan mal escritos")
@@ -95,43 +83,37 @@ class Inversor():
             raise ValueError ("Ocurrio un error")
          
 #Alta Inversor
-    def alta_inversor(self):
+    def alta_inversor(self,id_persona_cuit,id_billetera,nombre,id_perfil,id_localidad,ex_politica,calle,numero_calle,
+                 correo_electronico,contraseña):
         try:
             # Verificar si el inversor ya existe en la base de datos
-            resultado = conectar_mysql(Orden="SELECT * FROM inversores WHERE id_persona_cuit=%s", valores=(self.get_id_persona_cuit(),))
-            
-            if resultado:  # Si el inversor ya existe
+            resultado = conectar_mysql(Orden=f"SELECT id_inversor FROM inversores WHERE id_inversor = '{id_persona_cuit}';")
+            if resultado[0][0] == id_persona_cuit:  # Si el inversor ya existe
                 return "Cuil ya registrado"
-            
-            # Si no existe, proceder a la inserción
-            Orden = """INSERT INTO inversores (id_persona_cuit, id_billetera, nombre, 
-            id_localidad, ex_politica, id_inversor, calle, numero_calle, correo_electronico, contraseña)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-            
-            valores = (
-                self.get_id_persona_cuit(), self.get_id_billetera(), self.get_nombre(), 
-                self.get_id_localidad(), self.get_ex_politica(), self.get_id_inversor(), 
-                self.get_calle(), self.get_numero_calle(), self.get_correo_electronico(), 
-                self.get_contraseña()
-            )
-            
-            conectar_mysql(Orden=Orden, valores=valores)
-            return "Inversor dado de alta exitosamente."
-        
-        except Exception as e:
-            return f"Ocurrió un error al intentar dar de alta el inversor: {str(e)}"
+            else:
+                # Si no existe, proceder a la inserción
+                conectar_mysql(Orden = "INSERT INTO inversores (id_inversor,id_perfil,id_localidad,id_billetera,nombre,ex_plitica,calle,numero_calle,correo_electronico,contraseña) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);",
+                                Valores = [id_persona_cuit,id_billetera,nombre,id_perfil,id_localidad,ex_politica,calle,numero_calle,correo_electronico,contraseña])
+                return "Inversor dado de alta exitosamente."
+        except:
+            return "Ocurrió un error al intentar dar de alta el inversor"
 
  # Baja Inversor
-    def baja_inversor(self):
-        if not self.inversor_existe():
-            return "El inversor no existe en la base de datos."
+    def baja_inversor(self,id_persona_cuit,contraseña):
         try:
-            query = "DELETE FROM inversores WHERE id_persona_cuit = %s"
-            valores = (self.get_id_persona_cuit(),)
-            conectar_mysql(Orden=query, valores=valores)
-            return "Inversor eliminado exitosamente."
-        except Exception as e:
-         return f"Ocurrió un error al intentar eliminar el inversor: {str(e)}"
+            resultado = conectar_mysql(Orden=f"SELECT id_inversor FROM inversores WHERE id_inversor = '{id_persona_cuit}'")
+            PasswordL = conectar_mysql(Orden=f"SELECT contraseña FROM inversores WHERE contraseña = '{contraseña}'")
+            
+            if resultado[0][0] != id_persona_cuit: 
+                return "El usuario no existe"
+            else:
+                if PasswordL[0][0] == str(contraseña): 
+                    conectar_mysql(Orden=f"DELETE FROM inversores WHERE id_inversor = '{id_persona_cuit}';")
+                    return "Inversor fue eliminado exitosamente."
+                else:
+                    return("La contraseña es incorrecta")
+        except:
+            return "Ocurrió un error al intentar eliminar el inversor"
 
 # Editar Inversor
     def editar_inversor(self, **kwargs):

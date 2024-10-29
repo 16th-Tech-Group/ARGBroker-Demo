@@ -1,4 +1,4 @@
-from Conexion_MySQL import conectar_mysql, conexion
+from Conexion_MySQL import conectar_mysql
 # Crear Clases Generales
 class PerfilInversor():
     def __init__(self,id_tipo_inversor,tipo_inversor):
@@ -43,7 +43,7 @@ class Localidad:
     def set__nombre_localidad(self):
         return self.__nombre_localidad 
 #CREAR METODOS: AGREGAR, EDITAR, ELIMINAR  (CLASES LOCALIDAD Y PROVINCIA)
-#metodo aeditar_localidad
+#metodo editar_localidad
     def editar_localidad(self,localidad_editada):
         self.__nombre_localidad=localidad_editada
         return(f"El nombre de la localidad se actualizó: {self.__nombre_localidad}")

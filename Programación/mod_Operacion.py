@@ -1,3 +1,4 @@
+from Conexion_MySQL import conectar_mysql
 # Crear Clase Operacion
 import datetime
 
@@ -54,12 +55,12 @@ class Operacion():
         if tipo_operacion == "compra":
             precio_operacion="SELECT precio_compra FROM Acciones WHERE id_accion=%s"
             if precio_operacion*cantidad>saldo_inversor:
-                print("No tiene saldo para efectuar la operacion")
+                return "No tiene saldo para efectuar la operacion"
             else:
                 operacion="INSERT INTO operaciones (id_operacion,tipo_operacion,precio_operacion,fecha,id_inversor,id_accion) VALUES (%s,%s,%s,%s,%s,%s))"
                 valores=[id_operacion,tipo_operacion,precio_operacion,fecha,id_inversor,id_accion]
                 conectar_mysql(operacion=operacion, valores=valores)
-                print("Operacion realizada con exito")
+                return "Operacion realizada con exito"
         else: 
             precio_operacion="SELECT precio_venta FROM Acciones WHERE id_accion=%s"
             if cantidad<cant_id_inversor:
