@@ -17,7 +17,7 @@ def conectar_mysql(Orden, Valores = None):
         # conexion 
         Cnx = mysql.connector.connect(
                 user="root",
-                password="30060512V",
+                password="Mysql2024",
                 host="localhost",
                 database="ARGBrokerDemo",
                 port="3306")
