@@ -1,3 +1,4 @@
+import Conexion_MySQL
 from Conexion_MySQL import conectar_mysql
 #Crear Clase Inversor
 class Inversor():
@@ -96,28 +97,38 @@ class Inversor():
          
 #Alta Inversor
     def alta_inversor(self):
+        self.id_persona_cuit=input("Cuit: ")
+        id_billetera="SELECT COUNT(id_billetera) FROM Billeteras"
+        id_billetera=conectar_mysql(id_billetera)
+        self.id_billetera=int(id_billetera[0][0])+1
+        self.nombre=input("Nombre: ")
+        id_localidad=input("Localidad:")
+        id_localidad="SELECT id_localidad FROM Localidades WHERE nombre_localidad= '{id_localidad}';"
+        self.id_localidad=conectar_mysql(id_localidad)
+        self.ex_politica=input("¿Es ud una Persona Expuesta Politicamente: ")
+        id_inversor="SELECT COUNT(*) FROM Inversores"
+        self.id_inversor=conectar_mysql(id_inversor)
+        self.calle=input("Calle: ")
+        self.numero_calle=input("N°: ")
+        self.correo_electronico=input("Usuario (Ingrese Correo Electronico: ")
+        self.contraseña=input("Ingrese una contraseña")
         try:
             # Verificar si el inversor ya existe en la base de datos
             resultado = conectar_mysql(Orden="SELECT * FROM inversores WHERE id_persona_cuit=%s", valores=(self.get_id_persona_cuit(),))
             
-            if resultado:  # Si el inversor ya existe
+            if resultado != 0:  # Si el inversor ya existe
                 return "Cuil ya registrado"
             
             # Si no existe, proceder a la inserción
-            Orden = """INSERT INTO inversores (id_persona_cuit, id_billetera, nombre, 
-            id_localidad, ex_politica, id_inversor, calle, numero_calle, correo_electronico, contraseña)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+            else:
+                orden = """INSERT INTO inversores (id_persona_cuit, id_billetera, nombre, 
+                    id_localidad, ex_politica, id_inversor, calle, numero_calle, correo_electronico, contraseña)
+                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
             
-            valores = (
-                self.get_id_persona_cuit(), self.get_id_billetera(), self.get_nombre(), 
-                self.get_id_localidad(), self.get_ex_politica(), self.get_id_inversor(), 
-                self.get_calle(), self.get_numero_calle(), self.get_correo_electronico(), 
-                self.get_contraseña()
-            )
+                valores = [self.get_id_persona_cuit(),self.get_id_billetera(),self.get_nombre(),self.get_id_localidad(),self.get_ex_politica(),self.get_id_inversor(),self.get_calle(),self.get_numero_calle(),self.get_correo_electronico(),self.get_contraseña()]
             
-            conectar_mysql(Orden=Orden, valores=valores)
-            return "Inversor dado de alta exitosamente."
-        
+                resultado = conectar_mysql(orden=orden, valores=valores)
+                return "Inversor dado de alta exitosamente."
         except Exception as e:
             return f"Ocurrió un error al intentar dar de alta el inversor: {str(e)}"
 
