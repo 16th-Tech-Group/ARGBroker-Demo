@@ -1,4 +1,3 @@
-import Conexion_MySQL
 from Conexion_MySQL import conectar_mysql
 #Crear Clase Inversor
 class Inversor():
@@ -114,19 +113,15 @@ class Inversor():
         self.contraseña=input("Ingrese una contraseña")
         try:
             # Verificar si el inversor ya existe en la base de datos
-            resultado = conectar_mysql(Orden="SELECT * FROM inversores WHERE id_persona_cuit=%s", valores=(self.get_id_persona_cuit(),))
+            resultado = conectar_mysql(Orden="SELECT * FROM inversores WHERE id_persona_cuit=%s;", valores=(self.id_persona_cuit))
             
             if resultado != 0:  # Si el inversor ya existe
                 return "Cuil ya registrado"
             
             # Si no existe, proceder a la inserción
             else:
-                orden = """INSERT INTO inversores (id_persona_cuit, id_billetera, nombre, 
-                    id_localidad, ex_politica, id_inversor, calle, numero_calle, correo_electronico, contraseña)
-                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-            
-                valores = [self.get_id_persona_cuit(),self.get_id_billetera(),self.get_nombre(),self.get_id_localidad(),self.get_ex_politica(),self.get_id_inversor(),self.get_calle(),self.get_numero_calle(),self.get_correo_electronico(),self.get_contraseña()]
-            
+                orden = "INSERT INTO inversores (id_persona_cuit, id_billetera,nombre,id_localidad, ex_politica, id_inversor, calle, numero_calle, correo_electronico, contraseña) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);"
+                valores = [self.id_persona_cuit,self.id_billetera,self.nombre,self.id_localidad,self.ex_politica,self.id_inversor,self.calle,self.numero_calle,self.correo_electronico,self.contraseña]
                 resultado = conectar_mysql(orden=orden, valores=valores)
                 return "Inversor dado de alta exitosamente."
         except Exception as e:
