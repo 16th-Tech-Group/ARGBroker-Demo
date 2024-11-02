@@ -51,12 +51,7 @@ def conectar_mysql(Orden, Valores = None):
         else:
             raise err
 
-
-
-
-
 if __name__ == '__main__':
     
     conectar_mysql(Orden = "insert into Provincias (id_provincia,nombre_provincia) Values(%s,%s)",
-                   Valores = [27,"Isla Sandwich"])
-
+                   Valores = [3,"Cordoba"])
