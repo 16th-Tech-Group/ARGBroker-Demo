@@ -1,4 +1,5 @@
-from Conexion_MySQL import conectar_mysql, conexion
+from Conexion_MySQL import conectar_mysql
+from mod_Billetera import Billetera
 # Crear Clases Generales
 class PerfilInversor():
     def __init__(self,id_tipo_inversor,tipo_inversor):
@@ -48,3 +49,40 @@ class Localidad:
         self.__nombre_localidad=localidad_editada
         return(f"El nombre de la localidad se actualizó: {self.__nombre_localidad}")
     
+def menu_inicio():
+    #Menu opciones
+    print("-------------------------------------------------")
+    print("-------------------------------------------------")
+    print("Bienvenidos a ARG BROKER DEMO By 16th Tech Group ")
+    print("                Menu Inicio                      ")
+    print("            Opciones de Inicio                   ")
+    print("-------------------------------------------------")
+    print("1 - Iniciar Sesion")
+    print("2 - Nuevo Usuario")
+    print("-------------------------------------------------")
+
+#Ingreso
+def menu_ingreso():
+    print("----------------BIENVENIDO-----------------------")
+    print("-------------------------------------------------")
+    print("      ARG BROKER DEMO By 16th Tech Group "        )
+    print("                                                 ")
+    print("            Opciones de Usuario                  ")
+    print("-------------------------------------------------")
+    print("1 - Comprar")
+    print("2 - Vender")
+    print("3 - Consulta SALDO")
+    print("4 - Cerrar Sesión")
+    print("-------------------------------------------------") 
+
+def Operaciones():
+    print("----------------OPERACIONES DE COMPRA------------")
+    print("                 VALORES NEGOCIADOS")
+    print(conectar_mysql())
+
+
+
+
+
+    print("-------------------------------------------------")
+    print("      ARG BROKER DEMO By 16th Tech Group "        )
