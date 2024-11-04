@@ -1,5 +1,6 @@
 # Crear Clase Operacion
 import datetime
+from Conexion_MySQL import conectar_mysql
 
 class Operacion():
     def __init__(self,id_operacion,tipo_operacion,precio_operacion,fecha,id_inversor,id_accion):
@@ -45,7 +46,6 @@ class Operacion():
 
 #Crear metodo generar_orden
     def generar_orden(tipo_operacion,id_inversor,id_accion,cantidad):
-        tipo_operacion=input("Ingrese 1 si quiere comprar o 2 si quiere vender:")
         cant_id_inversor= "SELECT SUM(*) FROM operaciones WHERE id_inversor=%s AND id_accion=%s"
         saldo_inversor="SELECT saldo_ars FROM billeteras WHERE id_inversor=%s"
         id_operacion="SELECT COUNT(*) FROM operaciones"
@@ -68,7 +68,3 @@ class Operacion():
                 operacion="INSERT INTO operaciones (id_operacion,tipo_operacion,precio_operacion,fecha,id_inversor,id_accion) VALUES (%s,%s,%s,%s,%s,%s))"
                 conectar_mysql(operacion=operacion, valores=valores)
                 return "Operacion realizada con exito"
-
-
-
-
