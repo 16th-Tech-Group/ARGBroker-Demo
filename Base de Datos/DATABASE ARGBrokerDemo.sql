@@ -16,23 +16,23 @@ id_localidad INT PRIMARY KEY,
 nombre_localidad VARCHAR(100),
 id_provincia VARCHAR (100));
 CREATE TABLE Inversores(
-id_inversor INT PRIMARY KEY,
+id_persona_cuit INT PRIMARY KEY,
 id_perfil INT,
 id_localidad INT,
 id_billetera INT,
 nombre VARCHAR(70),
-ex_plitica VARCHAR(2),
+ex_politica VARCHAR(2),
 calle VARCHAR(70),
 numero_calle INT,
-correo_electronico VARCHAR(70),
-contraseña VARCHAR(50));
+correo_electronico NVARCHAR(255),
+contraseña NVARCHAR(255));
 CREATE TABLE Billeteras(
-id_billetera INT PRIMARY KEY,
-id_inversor INT,
+id_billetera INT PRIMARY KEY AUTO_INCREMENT,
+id_persona_cuit INT,
 id_operacion INT,
 cantidad_accion_total INT,
 valor_promedio FLOAT,
-saldo_ars FLOAT,
+saldo_ars FLOAT DEFAULT 1000000,
 balance_total FLOAT,
 pnl FLOAT);
 CREATE TABLE Operaciones(
