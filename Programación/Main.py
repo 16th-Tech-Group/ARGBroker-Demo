@@ -1,7 +1,7 @@
 from mod_Accion import Accion
 from mod_Billetera import Billetera
 from mod_Inversor import Inversor
-from mod_Tablas_Grales import PerfilInversor, Provincia,Localidad, menu_inicio, menu_ingreso
+from mod_Tablas_Grales import PerfilInversor, Provincia,Localidad, menu_inicio, menu_ingreso,lista_de_acciones
 from mod_Operacion import Operacion
 import Conexion_MySQL
 import datetime
@@ -29,6 +29,31 @@ else:
     print("Saldo en Efectivo:   $       "+str(saldo))
     print("-------------------------------------------------")
     print("Elegi la Operación a realizar: ") 
-#Probar Metodos
+    elegir_operacion=int(input())
+    if elegir_operacion<3:
+        lista_de_acciones(id)
+        if elegir_operacion==1:
+            tipo_operacion="compra"
+            id_inversor=int(id)
+            id_accion=input("Elige Codigo Acción: ")
+            cantidad=input("Ingresa la Cantidad a Operar: ")
+            nueva_operacion=Operacion("id_operacion","tipo_operacion","precio_operacion","fecha","id_inversor","id_accion")
+            nueva_operacion.generar_orden(tipo_operacion,id_inversor,id_accion,cantidad)
+        else:
+            tipo_operacion="compra"
+            id_inversor=id
+            id_accion=input("Elige Codigo Acción: ")
+            cantidad=int(input("Ingresa la Cantidad a Operar: "))
+            nueva_operacion=Operacion("id_operacion","tipo_operacion","precio_operacion","fecha","id_inversor","id_accion")
+            nueva_operacion.generar_orden(tipo_operacion,id_inversor,id_accion,cantidad)
+    elif elegir_operacion==3:
+        billetera=Billetera()
+        billetera.consultar_saldo(id)
+    else: 
+        id=0
+        print("Vuelve a Iniciar el Sistema")
+
+
+
 
 

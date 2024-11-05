@@ -19,3 +19,5 @@ class Billetera:
         orden="INSERT INTO billeteras (id_persona_cuit) VALUES (%s);"
         valor=[id_persona_cuit]
         conectar_mysql(orden,valor)
+    def consultar_saldo(self,id_persona_cuit):
+        conectar_mysql(orden="SELECT id_accion, SUM(cantidad),PROM(precio_venta) FROM acciones WHERE id_persona_cuit=({0})".format(id_persona_cuit))

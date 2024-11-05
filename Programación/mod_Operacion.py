@@ -45,26 +45,26 @@ class Operacion():
 
 
 #Crear metodo generar_orden
-    def generar_orden(tipo_operacion,id_inversor,id_accion,cantidad):
-        cant_id_inversor= "SELECT SUM(*) FROM operaciones WHERE id_inversor=%s AND id_accion=%s"
-        saldo_inversor="SELECT saldo_ars FROM billeteras WHERE id_inversor=%s"
-        id_operacion="SELECT COUNT(*) FROM operaciones"
-        id_operacion=id_operacion+1
+    def generar_orden(self,tipo_operacion,id_inversor,id_accion,cantidad):
+        cant_id_inversor=conectar_mysql(Orden="SELECT SUM(cantidad_accion) FROM operaciones WHERE id_inversor=%s AND id_accion=%s GROUP BY id_accion",Valores=(id_inversor,id_accion))
+        saldo_inversor=conectar_mysql("SELECT saldo_ars FROM billeteras WHERE id_inversor=({0}),format(id_inversor)".format(id_inversor))
         fecha=datetime.date.today()
         if tipo_operacion == "compra":
-            precio_operacion="SELECT precio_compra FROM Acciones WHERE id_accion=%s"
+            precio_operacion=conectar_mysql("SELECT precio_compra FROM Acciones WHERE id_accion=({0})".format(id_accion))
+            precio_operacion=int(precio_operacion[0][0])
             if precio_operacion*cantidad>saldo_inversor:
                 print("No tiene saldo para efectuar la operacion")
             else:
-                operacion="INSERT INTO operaciones (id_operacion,tipo_operacion,precio_operacion,fecha,id_inversor,id_accion) VALUES (%s,%s,%s,%s,%s,%s))"
-                valores=[id_operacion,tipo_operacion,precio_operacion,fecha,id_inversor,id_accion]
+                operacion=conectar_mysql("INSERT INTO operaciones (tipo_operacion,precio_operacion,fecha,id_inversor,id_accion) VALUES (%s,%s,%s,%s,%s))")
+                valores=[tipo_operacion,precio_operacion,fecha,id_inversor,id_accion]
                 conectar_mysql(operacion=operacion, valores=valores)
                 print("Operacion realizada con exito")
         else: 
-            precio_operacion="SELECT precio_venta FROM Acciones WHERE id_accion=%s"
+            precio_operacion=conectar_mysql("SELECT precio_compra FROM Acciones WHERE id_accion=({0})".format(id_accion))
+            precio_operacion=int(precio_operacion[0][0])
             if cantidad<cant_id_inversor:
                 return "Cantidad de acciones insuficiente para efectuar la operacion"
             else:
-                operacion="INSERT INTO operaciones (id_operacion,tipo_operacion,precio_operacion,fecha,id_inversor,id_accion) VALUES (%s,%s,%s,%s,%s,%s))"
+                operacion="INSERT INTO operaciones (tipo_operacion,precio_operacion,fecha,id_inversor,id_accion) VALUES (%s,%s,%s,%s,%s))"
                 conectar_mysql(operacion=operacion, valores=valores)
                 return "Operacion realizada con exito"

@@ -1,5 +1,6 @@
 from Conexion_MySQL import conectar_mysql
 from mod_Billetera import Billetera
+from prettytable import PrettyTable
 # Crear Clases Generales
 class PerfilInversor():
     def __init__(self,id_tipo_inversor,tipo_inversor):
@@ -71,18 +72,18 @@ def menu_ingreso():
     print("-------------------------------------------------")
     print("1 - Comprar")
     print("2 - Vender")
-    print("3 - Consulta SALDO")
+    print("3 - Consulta INVERSIONES")
     print("4 - Cerrar Sesión")
     print("-------------------------------------------------") 
 
-def Operaciones():
+def lista_de_acciones(valores):
     print("----------------OPERACIONES DE COMPRA------------")
     print("                 VALORES NEGOCIADOS")
-    print(conectar_mysql())
-
-
-
-
-
+    tabla= PrettyTable()
+    tabla.add_column("Codigo",conectar_mysql(Orden="SELECT id_accion from acciones"),)
+    tabla.add_column("Nombre de la Empresa",conectar_mysql(Orden="SELECT nombre_empresa from acciones"),)
+    tabla.add_column("Precio de Venta",conectar_mysql(Orden="SELECT precio_venta from acciones"),)
+    tabla.add_column("Precio de Compra",conectar_mysql(Orden="SELECT precio_compra from acciones"),)
     print("-------------------------------------------------")
+    print(tabla)
     print("      ARG BROKER DEMO By 16th Tech Group "        )
