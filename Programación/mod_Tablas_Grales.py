@@ -87,3 +87,14 @@ def lista_de_acciones(valores):
     print("-------------------------------------------------")
     print(tabla)
     print("      ARG BROKER DEMO By 16th Tech Group "        )
+
+def inversiones(id_billetera):
+    print("----------------LISTADO DE INVERSIONES------------")
+    print("                 VALORES EN CUSTODIA")
+    print(conectar_mysql(f"SELECT operaciones.id_accion,acciones.nombre_empresa,SUM(operaciones.cantidad_accion) FROM operaciones LEFT JOIN acciones ON acciones.id_accion=operaciones.id_accion WHERE id_billetera={id_billetera} GROUP BY operaciones.id_accion;"))
+    #tabla= PrettyTable()
+    #tabla.add_column("Cod Acción",conectar_mysql(f"SELECT operaciones.id_accion,FROM operaciones WHERE id_billetera={id_billetera}"))
+    #tabla.add_column("Nombre de la Empresa",conectar_mysql(f"SELECT acciones.nombre_empresa FROM operaciones LEFT JOIN acciones ON acciones.id_accion=operaciones.id_accion WHERE id_billetera={id_billetera} GROUP BY operaciones.id_accion;"))
+    #tabla.add_column("Cantidad",conectar_mysql(f"SELECT SUM(operaciones.cantidad_accion) FROM operaciones LEFT JOIN acciones ON acciones.id_accion=operaciones.id_accion WHERE id_billetera={id_billetera} GROUP BY operaciones.id_accion;"))
+    print("-------------------------------------------------")
+    print("      ARG BROKER DEMO By 16th Tech Group "        )
